@@ -1,10 +1,11 @@
 const { ValidationError } = require('sequelize');
 
 function logErrors (err, req, res, next) {
-  console.error(err);
+  // console.error(err); más tarde se va a ver cómo mostrar en testeo o en desarrollo
   next(err);
 }
 
+// eslint-disable-next-line no-unused-vars
 function errorHandler(err, req, res, next) {
   res.status(500).json({
     message: err.message,
