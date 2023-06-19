@@ -1,0 +1,9 @@
+No deberías utilizar la base de datos
+de desarrollo o producción para hacer
+pruebas, debido a que tendrías dificultades
+más luego, por ejemplo: cuando ejecuto
+por primera vez se va crear un usuario
+con un email unico y su contraseña,
+sin embargo, cuando vuelva a ejecutar
+el programa entonces ya no va poder
+debido a que el objeto ya a sido creado

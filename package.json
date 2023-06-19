@@ -11,7 +11,7 @@
     "migrations:run": "sequelize-cli db:migrate",
     "migrations:revert": "sequelize-cli db:migrate:undo",
     "migrations:delete": "sequelize-cli db:migrate:undo:all",
-    "e2e": "jest --config ./jest-e2e.json --verbose --detectOpenHandles --forceExit",
+    "e2e": "cross-env NODE_ENV=e2e jest --config ./jest-e2e.json --verbose --detectOpenHandles --forceExit",
     "e2e:coverage": "jest --config ./jest-e2e.json --verbose --detectOpenHandles --forceExit --coverage"
   },
   "keywords": [],
@@ -31,6 +31,7 @@
     "@hapi/boom": "10.0.0",
     "bcrypt": "5.0.1",
     "cors": "2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "16.0.1",
     "express": "4.18.1",
     "joi": "17.6.0",

@@ -6,7 +6,7 @@ describe('test for app', () => {
   let server = null;
   let api = null;
   // antes de cada prueba se debe establecer el servidor
-  beforeEach(() => {
+  beforeAll(() => {
     app = createApp();
 
     server = app.listen(9000);
@@ -22,7 +22,19 @@ describe('test for app', () => {
   });
   // como buena practica se debe cerrar el servidor una vez
   // completado la prueba
-  afterEach(() => {
+
+  test('GET /nueva-ruta 401', async () => {
+    const { statusCode } = await api.get('/nueva-ruta');
+    expect(statusCode).toEqual(401);
+  });
+
+  test('GET /nueva-ruta 200', async () => {
+    const { statusCode } = await api.get('/nueva-ruta').set({ api: '79823' });
+    expect(statusCode).toEqual(200);
+  });
+
+
+  afterAll(() => {
     server.close();
   });
 });

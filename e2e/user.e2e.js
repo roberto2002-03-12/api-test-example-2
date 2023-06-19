@@ -1,12 +1,13 @@
 const request = require('supertest');
 const createApp = require('../src/app');
+const { models } = require('../src/db/sequelize');
 
 describe('test for app', () => {
   let app = null;
   let server = null;
   let api = null;
 
-  beforeEach(() => {
+  beforeAll(() => {
     app = createApp();
 
     server = app.listen(9000);
@@ -62,9 +63,24 @@ describe('test for app', () => {
       expect(statusCode).toBe(400);
       expect(body.message).toMatch(/email/);
     });
+
+    // post que funcione
+    test('Petition works, should return statusCode 201', async () => {
+      const inputData = {
+        email: 'ejemplo@gmail.com',
+        password: 'contrasena',
+      };
+      const { statusCode, body } = await api.post('/api/v1/users').send(inputData);
+      expect(statusCode).toEqual(201);
+      const user = await models.User.findByPk(body.id);
+      expect(user).toBeTruthy();
+      // by default when you create an user is assigned with admin role
+      expect(user.dataValues.role).toEqual('admin');
+      expect(user.dataValues.email).toEqual(inputData.email);
+    });
   });
 
-  afterEach(() => {
+  afterAll(() => {
     server.close();
   });
 });
